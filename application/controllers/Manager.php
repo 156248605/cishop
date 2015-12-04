@@ -2,6 +2,7 @@
 class Manager extends  CI_Controller{
     public  function __construct()
       {
+          //echo $this->db->last_query(); 打印最后一条执行的sql
           parent::__construct();
           $this->load->model('Manager_model');
           $this->load->helper(array('url','Request'));
@@ -37,15 +38,19 @@ class Manager extends  CI_Controller{
          $data['AllLevel'] = $this->Level_model->findAll();
          $data['OneManager']=$this->Manager_model->findone();
          if ($this->input->post('send')) {
+             //定义数据库字段
+             $_fields = array('pass','level');
+             $_id=$this->input->post('id');
              $this->load->library('form_validation');
              $this->form_validation->set_rules('pass', '密码', 'required');
              $this->form_validation->set_rules('notpass', '确认密码', array('required','matches[pass]'));
-             $this->form_validation->set_rules('level','等级','differs[0]',array('differs'=>'必须选择一个等级名称'));
-             if($this->form_validation->run()==FALSE)$this->load->view('/admin/manager/update',$data);
-
-           //  $this->_model->update() ? $this->_redirect->succ(Tool::getPrevPage(), '管理员修改成功！') : $this->_redirect->error('管理员修改失败！');
+             if($this->form_validation->run()==FALSE) {
+                 $this->load->view('/admin/manager/update', $data);
+                 return;
+             }
+             $_updatedata=filter($this->input->post(NULL,TRUE),$_fields);
+             $this->Manager_model->update($_updatedata,$_id)?$this->load->view('/public/succ',array('message'=>'更新成功','url'=>'/manager')):$this->load->view('/public/error',array('message'=>'更新失败','url'=>'/manager'));
          }else {
-
              $this->load->view('/admin/manager/update', $data);
          }
      }

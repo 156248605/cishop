@@ -17,7 +17,7 @@ function page_config($count,$url){
     $config['full_tag_open'] = '<p>';
     $config['full_tag_close'] = '</p>';
     $config['total_rows']=$count;
-    $config['per_page'] = 10;
+    $config['per_page'] = 8;
     $config['uri_segment'] = 3;
     $config['first_link'] = '第一页';
     $config['last_link'] = '最后一页';

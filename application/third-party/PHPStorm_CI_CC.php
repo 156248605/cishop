@@ -83,6 +83,7 @@
 	 * @property movie_model         $movie_model
 	 * @property Level_model         $Level_model
 	 * @property Manager_model       $Manager_model
+	 * @property Nav_model           $Nav_model
 	 */
 	class CI_Controller {
 		public function __construct() {

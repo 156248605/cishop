@@ -16,7 +16,7 @@
 </head>
 <body>
 <?php echo validation_errors(); ?>
-<h2><a href="?a=manager">返回管理员列表</a>系统 -- 修改管理员</h2>
+<h2><a href="/manager">返回管理员列表</a>系统 -- 修改管理员</h2>
 <?php echo form_open('/manager/update')?>
 <input type="hidden" name="flag" id="flag" />
 <dl class="form">
@@ -27,15 +27,11 @@
     <dd>等　　级：<select name="level">
             <option value="0">--请选择一个等级权限--</option>
             <?php foreach($AllLevel as $key=>$value):?>
-            <option value="<?=$value['id']?>"><?=$value['level_name']?></option>
+            <option value="<?=$value['id']?>"  <?php if($value['id']==$OneManager[0]['level']): ?> selected="selected" <?php endif;?> ><?=$value['level_name']?></option>
             <?php endforeach;?>
         </select> ( * 必须选定一个权限 )</dd>
     <dd><input type="submit" name="send"  value="修改管理员" class="submit" /></dd>
 </dl>
-
-
-
-
 </form>
 </body>
 </html>

@@ -6,7 +6,12 @@ class Manager_model extends  CI_Model{
 
     }
     public  function  findAll($per_page='',$uri=''){
-        $query = $this->db->get('manager',$per_page,$uri);
+        $this->db->select('manager.id,manager.user,manager.level,manager.login_count,manager.last_ip,manager.last_time,level.level_name');
+        $this->db->from('manager');
+        $this->db->join('level','manager.level=level.id','left');
+        $this->db->limit($per_page,$uri);
+        $this->db->order_by('manager.reg_time','DESC');
+        $query= $this->db->get();
         return $query->result_array();
     }
     public  function  findOne(){
@@ -36,13 +41,10 @@ class Manager_model extends  CI_Model{
         $_adddata['reg_time'] =date('Y-m-d H:i:s');
         return $this->db->insert('manager',$_adddata);
     }
-    public  function  update(array$a=array(),array $b=array(),array $c=array()){
-        $_where = array("id='{$this->_R['id']}'");
-        if(!$this->_check->oneCheck($this,$_where)) $this->_check->error();
-        if(!$this->_check->updateCheck($this)) $this->_check->error();
-        $_updateData = $this->getRequest()->filter($this->_fields);
-        $_updateData['pass'] = sha1($_updateData['pass']);
-        return parent::update($_where, $_updateData);
+    public  function  update(array $_updatedata,$_where){
+        $_updatedata['pass']=sha1($_updatedata['pass']);
+        $this->db->where('id',$_where);
+        return $this->db->update('manager',$_updatedata);
     }
     public  function  delete(){
        return $this->db->delete('manager', array('id' => $this->input->get('id')));
