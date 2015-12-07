@@ -111,8 +111,8 @@ dl.form input.submit {
 }
 #page a:hover,#page span.me {
     color:#fff;
-    border:1px solid #335B64;
-    background:#335B64;
+    border:1px solid #c00;
+    background:#c00;
     text-decoration:none;
 }
 #page span.disabled {

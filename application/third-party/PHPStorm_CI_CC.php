@@ -84,6 +84,8 @@
 	 * @property Level_model         $Level_model
 	 * @property Manager_model       $Manager_model
 	 * @property Nav_model           $Nav_model
+	 * @property Brand_model         $Brand_model
+	 * @property Goods_model         $Goods_model
 	 */
 	class CI_Controller {
 		public function __construct() {

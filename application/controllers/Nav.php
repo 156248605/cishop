@@ -20,13 +20,35 @@ class Nav extends  CI_Controller{
          $this->load->view('admin/nav/show',$data);
      }
     public function  add(){
-        $this->load->library('form_validation');
+        $data=array();
+        // $this->load->library('form_validation');
+        //echo $this->db->last_query()
+        $this->load->helper('request');
+        if($this->input->post('send')){
+             $_fields = array('name','info','sort','sid');
+             $data=$this->input->post(NULL,TRUE);
+             $_adddata=filter($data,$_fields);
+             $this->Nav_model->add($_adddata)? $this->load->view('/public/succ',array('message'=>'导航新增成功','url'=>'/nav')):$this->load->view('/public/error',array('message'=>'导入新增失败','url'=>'/nav'));
+             return;
+        }
+        if($this->input->get('id')){
+          $data['OneNav']=$this->Nav_model->findOne();
+        }
+        $this->load->view('/admin/nav/add',$data);
+    }
+    public  function  delete(){
+        if($this->input->get('id'))$this->Nav_model->delete()?$this->load->view('/public/succ',array('message'=>'导航删除成功','url'=>'/nav')):$this->load->view('/public/error',array('message'=>'导航删除失败','url'=>'/nav'));
+    }
+    //排序
+    public function  sort(){
+       // if (isset($_POST['send'])) $this->_model->sort()?$this->_redirect->succ(Tool::getPrevPage()):$this->_redirect->error('排序失败！');
+       if ($this->input->post('send')) $this->Nav_model->sort()?redirect('/nav'):$this->load->view('/public/error',array('message'=>'排序失败','url'=>'/nav'));
+    }
+    public function  update(){
 
 
 
 
     }
-
-
 
 }
