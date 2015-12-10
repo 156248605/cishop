@@ -15,19 +15,19 @@
     <dl class="form">
         <dd>商品类型:<select name="nav">
                     <option value="0" select="selected">--请选择一个商品类型--</option>
-                       {foreach $addNav as $key=>$value}
-                          <optgroup label="{$value->name}">
-                            {html_options options=$value->child}
+                         <?php foreach ($addNav as $key=>$value):?>
+                          <optgroup label="<?php echo $value['name'];?>">
+                             <?php if (isset($value['child'])):?>
+                                  <?php foreach($value['child'] as $k=>$v):?>
+                                  <option value="<?=$k?>"><?=$v?></option>
+                                  <?php endforeach;?>
+                             <?php endif;?>
                           </optgroup>
-
-                        {/foreach}
+                        <?php endforeach;?>
                     </select><span class="red">[必填]</span>
         </dd>
           <dd>商品品牌:<select name="brand">
               <option value="0" select="selected">--请选择一个商品品牌--</option>
-
-
-
                      </select><span class="red">[必填]</span>
           </dd>
     </dl>

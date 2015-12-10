@@ -12,7 +12,7 @@
 <div id="list">
     <form method="post" action="/nav/sort">
         <table>
-            <tr><th>名称</th><th>简介</th><th>子类</th><th>排序</th><th>操作</th></tr>
+            <tr><th>名称</th><th>简介</th><?php if(isset($OneNav)):?><th>关联品牌</th><?php else:?><th>子类</th><?php endif;?><th>排序</th><th>操作</th></tr>
             <?php if (!empty($AllNav)):?>
             <?php foreach ($AllNav as $key=>$value): ?>
             <tr><td><?=$value['name']?></td><td><?=$value['info']?></td><td><?php if (isset($OneNav)): ?>无<?php else: ?><a href="/nav?sid=<?=$value['id']?>">查看</a> | <a href="/nav/add?id=<?=$value['id']?>">添加</a><?php endif;?></td><td><input type="text" name="sort[<?=$value['id']?>]" class="sort" value="<?=$value['sort']?>" /></td><td><a href="/nav/update&id=<?=$value['id']?>"><img src="/public/images/edit.gif" alt="编辑" title="编辑" /></a><a href="/nav/delete?id=<?=$value['id']?>" onclick="return confirm('你真的要删除这个导航吗？') ? true : false"><img src="/public/images/drop.gif" alt="删除" title="删除" /></a></td></tr>

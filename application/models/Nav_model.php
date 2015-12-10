@@ -50,16 +50,28 @@ class Nav_model extends CI_Model{
         return $query->result_array();
     }
     public function  findFrontNav(){
-
-       /* $_where = array("id='{$this->_R['id']}'");
-        if(!$this->_check->oneCheck($this,$_where))$this->_check->error('./');
-        //$_childNav = $_resultNav=array();
-        $_allNav=parent::select(array('id','name','sid'));
-        return Tree::getInstance()->getTree($_allNav,$this->_R['id']);*/
         $_allNav=$this->db->select('id,name,sid')->get('nav')->result_array();
         return Tree::getInstance()->getTree($_allNav,$this->input->get('id'));
     }
+     public function findAddGoodsNav(){
+         $_mainNav=$_childNav=array();
+         $_allNav=$this->db->select('id,name,sid')->order_by('sort','ASC')->get('nav')->result_array();
+         foreach ($_allNav as $_key=>$_value) {
+            $_value['sid']==0 ? $_mainNav[] = $_value : $_childNav[] = $_value;
+         }
+         foreach ($_mainNav as $_key=>$_value) {
+             foreach ($_childNav as $_k=>$_v) {
+                 if ($_value['id'] == $_v['sid']) {
+                     $_mainNav[$_key]['child'][$_v['id']]=$_v['name'];
+                 }
+             }
+         }
+           return $_mainNav;
+     }
+   public  function  findNavBrand(){
+       $query=$this->db->select('id,name')->from('brand')->get();
+       return $query->result_array();
 
-
+   }
 
 }

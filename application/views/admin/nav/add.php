@@ -17,6 +17,12 @@
         <?php if (isset($OneNav)):?>  <dd>主类名称：<?=$OneNav[0]['name'] ?></dd><?php endif;?>
         <dd>名 称：<input type="text" name="name" class="text" /> ( * 2-4位之间 )</dd>
         <dd><span class="middle">简 介：</span><textarea id="info" name="info"></textarea><span class="middle">( *200位以内)</span></dd>
+        <?php if (isset($OneNav)):?>
+                <dd>关联品牌：<?php foreach ($AllBrand as $key=>$value):?>
+                 <input type="checkbox" name="brand[]" value="<?=$value['id']?>"><?=$value['name']?>
+                 <?php endforeach;?>
+                </dd>
+        <?php endif;?>
         <dd><input type="submit" name="send" value="新增导航条" class="submit" /></dd>
     </dl>
 </form>

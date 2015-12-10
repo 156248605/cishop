@@ -32,7 +32,8 @@ class Nav extends  CI_Controller{
              return;
         }
         if($this->input->get('id')){
-          $data['OneNav']=$this->Nav_model->findOne();
+           $data['OneNav']=$this->Nav_model->findOne();
+           $data['AllBrand']=$this->Nav_model->findNavBrand();
         }
         $this->load->view('/admin/nav/add',$data);
     }

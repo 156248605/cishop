@@ -17,9 +17,11 @@
 <div id="sidebar">
    <h2><?php echo $FrontNav[0]['name']; ?></h2>
     <ul style="0 0 10px 0">
+        <?php if (!empty($FrontNav[0]['child'])):?>
         <?php foreach($FrontNav[0]['child'] as $key=>$value):?>
         <li><a href="?a=list&id={$value->id}"><?=$value['name']?><span class="gray">(1000)</span></a></li>
         <?php endforeach;?>
+        <?php endif;?>
     </ul>
     <h2>当月热销</h2>
     <div style="0 0 10px 0">
