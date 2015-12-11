@@ -21,13 +21,15 @@ class Nav extends  CI_Controller{
      }
     public function  add(){
         $data=array();
-        // $this->load->library('form_validation');
         //echo $this->db->last_query()
         $this->load->helper('request');
         if($this->input->post('send')){
-             $_fields = array('name','info','sort','sid');
+             $_fields = array('name','info','sort','sid','brand');
              $data=$this->input->post(NULL,TRUE);
              $_adddata=filter($data,$_fields);
+              if(isset($_adddata['brand'])){
+                  $_adddata['brand']=serialize($_adddata['brand']);
+              }
              $this->Nav_model->add($_adddata)? $this->load->view('/public/succ',array('message'=>'导航新增成功','url'=>'/nav')):$this->load->view('/public/error',array('message'=>'导入新增失败','url'=>'/nav'));
              return;
         }

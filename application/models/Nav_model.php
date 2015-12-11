@@ -10,15 +10,29 @@ class Nav_model extends CI_Model{
         $this->db->where('sid',$sid);
         $this->db->order_by('sort');
         $query=$this->db->get('nav');
-        return $query->result_array();
+        $_allNav=$query->result_array();
+        foreach($_allNav as $k=>$v){
+              if($v['brand']==''){
+                  $_allNav[$k]['brand']='其它品牌';
+              }else{
+                 $tem_arr=unserialize($v['brand']);
+                  $_allNav[$k]['brand']='';
+                  foreach($tem_arr as $_k=>$_v){
+                       $brand=$this->db->select('name')->from('brand')->where('id',$_v)->limit(1)->get()->result_array();
+                      $_allNav[$k]['brand'] .=$brand[0]['name'].',';
+                  }
+                  $_allNav[$k]['brand']=substr($_allNav[$k]['brand'],0,-1);
+              }
+        }
+                 return $_allNav;
     }
     public function  findOne()
     {
         $query='';
         if ($this->input->get('sid')) {
-            $this->db->select('id,name,info');
+            $this->db->select('id,name,info,brand');
             $this->db->where('id', $this->input->get('sid'));
-            $this->db->limit('1');
+           $this->db->limit('1');
             $query = $this->db->get('nav');
         }
         if($this->input->get('id')){

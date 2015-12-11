@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/admin/style/goods.css">
     <script type="text/javascript" src="/public/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/public/js/goods.js"></script>
+    <script type="text/javascript" src="/public/js/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/public/js/ckeditor/lang/zh-cn.js"></script>
     <title>在线商城后台管理</title>
 </head>
 <body>
@@ -30,6 +32,12 @@
               <option value="0" select="selected">--请选择一个商品品牌--</option>
                      </select><span class="red">[必填]</span>
           </dd>
+        <dd>
+            <textarea name="editor1" id="editor1">&lt;p&gt;Initial editor content.&lt;/p&gt;</textarea>
+            <script>
+                CKEDITOR.replace( 'editor1' );
+            </script>
+        </dd>
     </dl>
 
 
