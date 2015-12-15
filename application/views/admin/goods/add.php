@@ -7,7 +7,6 @@
     <script type="text/javascript" src="/public/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/public/js/goods.js"></script>
     <script type="text/javascript" src="/public/js/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="/public/js/ckeditor/lang/zh-cn.js"></script>
     <title>在线商城后台管理</title>
 </head>
 <body>
