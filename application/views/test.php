@@ -1,26 +1,42 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="/public/js/uploadify/uploadify.css">
-        <script  type="text/javascript" src="/public/js/jquery-2.1.4.min.js"></script>
-        <script  type="text/javascript" src="/public/js/uploadify/jquery.uploadify.min.js"></script>
-<!--    <script type="text/javascript" src="/public/js/ckeditor/ckeditor.js"></script>-->
-    <title>测试</title>
-    <script type="text/javascript">
-        $(function() {
-            $('#file_upload').uploadify({
-                'swf'      : '/public/js/uploadify/uploadify.swf',
-                'uploader' : '/public/js/uploadify/uploadify.php'
-                // Your options here
-            });
-        });
-    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>UploadiFive Test</title>
+    <script src="/public/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="/public/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/public/js/uploadify/uploadify.css">
+    <style type="text/css">
+        body {
+            font: 13px Arial, Helvetica, Sans-serif;
+        }
+    </style>
 </head>
+
 <body>
-<input type="file" name="file_upload" id="file_upload" />
+<h1>Uploadify Demo</h1>
+<form>
+    <div id="queue"></div>
+    <input id="file_upload" name="file_upload" type="file" multiple="true">
+    <a href="javascript:$('#file_upload').uploadify('upload', '*')">上传</a> | <a href="javascript:$('#file_upload').uploadify('cancel')">取消</a>
+</form>
 
-
-
+<script type="text/javascript">
+    <?php $timestamp = time();?>
+    $(function() {
+        $('#file_upload').uploadify({
+            'auto':false,
+            'formData'     : {
+                'timestamp' : '<?php echo $timestamp;?>',
+                'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
+            },
+            'swf'      : '/public/js/uploadify/uploadify.swf',
+            'uploader' : '/test/uploadifty',
+            'onUploadComplete': function (file) {
+               alert('图片'+file.name+'上传成功.');
+            }
+        });
+    });
+</script>
 </body>
 </html>
