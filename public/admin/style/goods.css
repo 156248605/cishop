@@ -1,11 +1,15 @@
 @CHARSET "UTF-8";
 dl.form span .middle{
 
-    vertical-align:30px;
+    vertical-align:25px;
 
 }
 dl.form input.text {
-    width:200px;
+    width:349px;
+}
+dl.form input.small{
+    width: 71px;
+
 }
 dl.form select {
     width:202px;
