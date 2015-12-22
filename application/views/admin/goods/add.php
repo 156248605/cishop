@@ -15,7 +15,6 @@
             margin:10px 10px 0 0;
         }
     </style>
-
     <script type="text/javascript">
         <?php $timestamp = time();?>
         $(function() {
@@ -40,11 +39,30 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        $(function(){
+            $("select[name='nav']").change(function() {
+                var brand=document.getElementById('brand');
+                var selected=$("select[name='nav'] option:selected").val();
+               $.ajax({
+                    type:"POST",
+                    url:"/goods/getBrand",
+                    data:{id:selected},
+                   success:function(data){
+                       var a = data.split(':');
+                       brand.options.length = 1;
+                       for (var i=0;i<a.length;i=i+2) {
+                           brand.options.add(new Option(a[i+1], a[i]));
+                       }
+                   },
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <h2><a href="?a=goods">返回商品列表</a>商品 -- 添加商品</h2>
-
-<form method="post" action="?a=goods&m=add">
+<form method="post" action="/goods/add">
     <dl class="form" style="margin-left: 10px">
         <dd>商品类型:<select name="nav">
                     <option value="0" select="selected">--请选择一个商品类型--</option>
@@ -59,7 +77,7 @@
                         <?php endforeach;?>
                     </select><span class="red">[必填]</span>
         </dd>
-        <dd>商品品牌:<select name="brand">
+        <dd>商品品牌:<select name="brand" id="brand">
                 <option value="0" select="selected">--请选择一个商品品牌--</option>
             </select><span class="red">[必填]</span>
         </dd>
@@ -80,12 +98,12 @@
         </dd>
         <dd>是否上架：<input type="radio" name="is_up" value="1" checked="checked" />是 <input type="radio" name="is_up" value="0" />否　　免 运 费：<input type="radio" name="is_freight" value="1" checked="checked" />是 <input type="radio" name="is_freight" value="0" />否</dd>
         <dd>库　　存：<input type="text" name="inventory" value="100" class="text small" /> 库存告急：<input type="text" name="warn_inventory" value="1" class="text small" /> ( * 库存达到指定数量就会在后台提醒 )</dd>
+        <input name="filename" type="hidden" id="filename" value="" />
+   <!--     <input name="filesize" type="hidden" id="filesize" value="" />
+        <input name="filetype" type="hidden" id="filetype" value="" />-->
         <dd><input type="submit" name="send" value="新增商品" /> <input type="reset" value="重置" /></dd>
     </dl>
 </form>
-<input name="filename" type="hidden" id="filename" value="" />
-<input name="filesize" type="hidden" id="filesize" value="" />
-<input name="filetype" type="hidden" id="filetype" value="" />
 <script  type="text/javascript">
     CKEDITOR.replace( 'editor1' );
 </script>
