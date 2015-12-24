@@ -11,6 +11,14 @@ class Goods extends  CI_Controller{
         $this->load->view('/admin/goods/show');
     }
     public function  add(){
+        if(isset($_POST['send'])){
+            print_r($_POST);
+            exit();
+
+
+        }
+
+
         $data['addNav']=$this->Nav_model->findAddGoodsNav();
         $this->load->view('/admin/goods/add',$data);
     }

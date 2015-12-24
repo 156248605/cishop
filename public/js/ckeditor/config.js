@@ -8,5 +8,5 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
     config.image_previewText=' ';
-    config.filebrowserImageUploadUrl= "admin/UserArticleFileUpload.do";
+    config.filebrowserImageUploadUrl= "/test/ckeup?type=ok";
 };
