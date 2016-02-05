@@ -13,5 +13,21 @@ class Goods_model extends  CI_Model{
         if(empty($query)) return 1;
         return 0;
    }
+   public function find_all(){
+        $this->db->select('goods.id,goods.name,goods.sn,goods.brand,goods.price_sale,goods.is_up,goods.inventory,nav.name as nav_name');
+        $this->db->from('goods');
+        $this->db->join('nav','goods.nav=nav.id','left');
+        $query=$this->db->get();
+        $_allgoods=$query->result_array();
+//      $_allbrands=$this->db->select('id,name')->get('brand')->result_array();
+  /*    foreach ($_allgoods as $_key=>$_value) {
+           if ($_value['brand'] == 0) {
+               $_value['brand'] = '其他品牌';
+           } else {
+               $_value['brand'] = $_allbrands[$_value['brand']];
+           }
+       }*/
+        return $_allgoods;
+   }
 
 }

@@ -9,7 +9,18 @@ class Goods extends  CI_Controller{
          $this->load->helper(array('url','Request','form'));
     }
     public function index(){
-        $this->load->view('/admin/goods/show');
+        $this->load->library('pagination');
+        $data['AllGoods']=$this->Goods_model->find_all();
+        $this->load->view('/admin/goods/show',$data);
+
+      /*  $config=page_config($this->db->count_all('manager'),'/manager/index');
+        $this->pagination->initialize($config);
+        $data['Allmanager']=$this->Manager_model->findAll($config['per_page'],$this->uri->segment(3));
+        $this->load->view('/admin/manager/manager',$data);*/
+
+
+
+
     }
     public function  add(){
         if(isset($_POST['send'])){
