@@ -25,3 +25,16 @@ function page_config($count,$url){
     $config['prev_link'] = '上一页';
     return $config;
 }
+//读取文件夹下的所有文件和文件夹
+function read_all_file($dir){
+    $arr=array();
+    $fp=opendir($dir);
+    while(false!==($file=readdir($fp))){
+        if($file!='.'&&$file!='..') {
+            if (is_file($dir . '/' . $file)) $arr['file'][] = $file;
+            if (is_dir($dir . '/' . $file))  $arr['dir'][] = $file;
+        }
+    }
+    closedir($fp);
+    return  $arr;
+}

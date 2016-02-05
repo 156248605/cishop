@@ -94,7 +94,7 @@
             <img id="img_view" src=""  alt=""/>
         </dd>
         <dd>
-            <textarea name="editor1" id="editor1" ></textarea>
+            <textarea name="content" id="content" ></textarea>
         </dd>
         <dd>是否上架：<input type="radio" name="is_up" value="1" checked="checked" />是 <input type="radio" name="is_up" value="0" />否　　免 运 费：<input type="radio" name="is_freight" value="1" checked="checked" />是 <input type="radio" name="is_freight" value="0" />否</dd>
         <dd>库　　存：<input type="text" name="inventory" value="100" class="text small" /> 库存告急：<input type="text" name="warn_inventory" value="1" class="text small" /> ( * 库存达到指定数量就会在后台提醒 )</dd>
@@ -105,7 +105,7 @@
     </dl>
 </form>
 <script  type="text/javascript">
-    CKEDITOR.replace( 'editor1' );
+    CKEDITOR.replace( 'content' );
 </script>
 </body>
 </html>

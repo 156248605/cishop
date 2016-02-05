@@ -32,7 +32,7 @@ class Nav_model extends CI_Model{
         if ($this->input->get('sid')) {
             $this->db->select('id,name,info,brand');
             $this->db->where('id', $this->input->get('sid'));
-           $this->db->limit('1');
+            $this->db->limit('1');
             $query = $this->db->get('nav');
         }
         if($this->input->get('id')){
@@ -83,9 +83,8 @@ class Nav_model extends CI_Model{
            return $_mainNav;
      }
    public  function  findNavBrand(){
-       $query=$this->db->select('id,name')->from('brand')->get();
-       return $query->result_array();
-
+        $query=$this->db->select('id,name')->from('brand')->get();
+        return $query->result_array();
    }
 
 }
